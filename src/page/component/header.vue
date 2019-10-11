@@ -117,7 +117,6 @@ export default {
             // let scrollTop = this.$refs.pride_tab_fixed.getBoundingClientRect().top
             // 判断页面滚动的距离是否大于吸顶元素的位置
             this.headerFixed = scrollTop > this.offsetHeight;
-            console.log(scrollTop,this.headerFixed)
 		},
         //移入事件
         enterEvent(index, flag) {
@@ -216,7 +215,7 @@ export default {
     .sub-nav {
         position: absolute;
         min-width: 130px;
-        top: 80px;
+        top: 50px;
         padding: 0 10px;
         border: 1px solid #f6f6f6;
         border-top: none;
@@ -240,6 +239,12 @@ export default {
             line-height: 40px;
             text-align: center;
         }
+    }
+}
+.active-color {
+    color: red;
+    & > span {
+        color: red;
     }
 }
 </style>
