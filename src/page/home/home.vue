@@ -5,7 +5,7 @@
         <header-fix></header-fix>
         <!-- 轮播图 -->
         <section class="carousel">
-            <el-carousel :autoplay="false" indicator-position="none">
+            <el-carousel :autoplay="true" indicator-position="none">
                 <el-carousel-item v-for="item in imgArr" :key="item.id">
                 <img :src="item.src" />
                 </el-carousel-item>
@@ -20,7 +20,11 @@
             </section>
             <section class="star-service-list"> 
                 <template v-for="item in starServicelist">
-                    <div class="star-service-item" :key="item.id">
+                    <div :class="animateId == item.id ? 'breathing-light' : ''" 
+                        @mouseenter="breathingLightEnter(item.id)" 
+                        @mouseleave="breathingLightleave" 
+                        class="star-service-item" 
+                        :key="item.id">
                         <div class="content">
                             <img :src="item.src" />
                             <h3>{{item.txt}}</h3>
@@ -31,15 +35,73 @@
                 </template>
             </section>
         </section>
+        <!-- 理由列表 -->
+        <section class="reason-list">
+            <header class="title">
+                <p>专业的事, 交给专业的人做</p> 
+                <p>Professional things,to do professional people</p> 
+            </header>
+            <!-- whyme -->
+            <img width="1200" src="../../img/other/whyMe.jpg" />
+        </section>
+        <!-- 运营流程 -->
+        <section class="operation-list">
+            <header class="title">
+                <p>运营流程</p> 
+                <p>分为6个阶段</p> 
+            </header>
+            <img class="operation-content" width="1000" src="../../img/other/operation-content.jpg" />
+        </section>
+        <!-- 免费检查 -->
+        <section class="free-check">
+            <img class="free-img" src="../../img/other/free-check.jpg" />
+            <!-- 表单数据提交 --> 
+            <section class="form-list">
+                <section class="form-title">
+                    <h2>请准确填写</h2>
+                    <h2>以便于我们安排合适的运营经理为你诊断店铺</h2>
+                </section>
+                <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="你的联系方式">
+                        <el-input v-model="form.link"></el-input>
+                    </el-form-item>
+                    <el-form-item label="怎么称呼您">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+                    <el-form-item label="您的店铺名字/链接">
+                        <el-input v-model="form.shopNameOrAdder"></el-input>
+                    </el-form-item>
+                    <el-form-item label="您的店铺在以下哪个平台">
+                        <el-radio-group v-model="form.platform">
+                            <template v-for="item in platformList">
+                                <el-radio :key="item.id" :label="item.label"></el-radio>
+                            </template>
+                        </el-radio-group>
+                    </el-form-item>
+                    <el-form-item label="有没有想了解的服务">
+                        <template v-for="item in serviceList">
+                            <el-radio :key="item.id" :label="item.label"></el-radio>
+                        </template>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="onSubmit">免费诊断店铺</el-button>
+                    </el-form-item>
+                </el-form>
+            </section>
+        </section>
+        <!-- 底部 -->
+        <bottom></bottom>
     </div>
 </template>
 
 <script>
     import headerFix from "../component/header.vue";
+    import bottom from "../component/bottom.vue";
 
     export default {
         components: {
-            headerFix
+            headerFix,
+            bottom
         },
         data(){
             return {
@@ -99,11 +161,48 @@
                         txt: '免费店铺诊断',
                         subTxt: '诊断店铺基础情况',
                         thirdTxt: '深度解决店铺销量问题'
-                }]
+                }],
+                //平台
+                platformList: [
+                    {id: 1, label: '淘宝'},
+                    {id: 2, label: '天猫'},
+                    {id: 3, label: '京东'},
+                    {id: 4, label: '拼多多'},
+                    {id: 5, label: '阿里巴巴'}
+                ],
+                //服务
+                serviceList: [
+                    {id: 1, label: '网点运营推广'},
+                    {id: 2, label: '店铺装修设计'},
+                    {id: 3, label: '直通车/砖展'},
+                    {id: 4, label: '店铺诊断'},
+                    {id: 5, label: '打造爆款'},
+                    {id: 6, label: '其他'}
+                ],
+                form: {
+                    link: '',
+                    name: '',
+                    shopNameOrAdder: '',
+                    platform: '',
+                    delivery: false,
+                    type: [],
+                    resource: '',
+                    desc: ''
+                },
+                animateId: null
             }
         },
         methods: {
-            
+            breathingLightEnter(id) {
+                this.animateId = id
+            },
+            breathingLightleave() {
+                this.animateId = null
+            },
+            // 提交
+            onSubmit() {
+
+            } 
         }
     }
 </script>
@@ -127,9 +226,8 @@
 //热点服务
 .star-service {
     margin: 40px auto 0;
-    height: 500px;
     width: 1200px;
-    // background: red;
+    // background-color: #f4f4f4;
     text-align: center;
     .star-service-head {
         height: 40px;
@@ -155,16 +253,17 @@
         .star-service-item {
             width: 25%;
             height: 235px;
-            margin-top: 30px;
+            margin-top: 40px;
             position: relative;
             display: flex;
             justify-content: center;
+            transition: all .2s;
             .content {
                 @include ct;
                 height: 235px;
                 width: 250px;
                 padding-top: 20px;
-                background-color: #efefef;
+                background-color: #f4f4f4;
                 border-radius: 20px;
                 margin: 0 auto;
             }
@@ -180,4 +279,105 @@
         }
     }
 }
+//选择理由
+.reason-list {
+    margin: 40px auto 0;
+    width: 1200px;
+    background-color: #f4f4f4;
+}
+.title {
+    height: 140px;
+    text-align: center;
+    background-color: #ff4200;
+    > p {
+        height: 70px;
+        color: #fff;
+        &:nth-of-type(1) {
+            font-size: 30px;
+            padding-top: 30px;
+        }
+        &:nth-of-type(2) {
+            font-size: 18px;
+            line-height: 42px;
+        }
+    }
+}
+//运营流程
+.operation-list {
+    margin: 40px auto 0;
+    width: 1200px;
+    background-color: #f4f4f4;
+    .title {
+        height: 140px;
+    }
+    .operation-content {
+        margin: 40px 100px;
+        padding: 50px;
+        padding-bottom: 0px;
+    }
+}
+//免费体检
+.free-check {
+    margin: 40px auto 0;
+    width: 1200px;
+    background-color: #f4f4f4;
+    .free-img {
+        width: 100%;
+    }
+    .form-list {
+        margin-top: 50px;
+        padding: 0 100px;
+        .form-title {
+            margin-bottom: 40px;
+            h2 {
+                font-size: 16px;
+                line-height: 16px;
+                text-align: center;
+                &:nth-of-type(1) {
+                    color: #fb4200;
+                    font-weight: 600;
+                }
+                &:nth-of-type(2) {
+                    margin-top: 10px;
+                }
+            } 
+        }
+        ::v-deep .el-form {
+            padding-bottom: 20px;
+            .el-form-item__label {
+                display: block !important;
+                width: 100% !important;
+                text-align: left !important;
+                line-height: 25px !important;
+                color: #000;
+                font-weight: 600;
+            }
+            .el-form-item__content {
+                margin-left: 0 !important; 
+                
+            }
+            .el-form-item {
+                margin-bottom: 10px;
+                &:nth-of-type(6) {
+                    .el-form-item__content {
+                        text-align: center;
+                        button {
+                            background-color: #ff4200;
+                            border-color: #ff4200;
+                            font-size: 18px;
+                            span {
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.breathing-light {
+    transform: translateY(-20px);
+    transition: all .2s;
+}
+
 </style>

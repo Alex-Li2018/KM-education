@@ -171,6 +171,7 @@ export default {
         top:0px;
         left:0px;
         z-index: 1000;
+        opacity: .8;
     }
     .header-content {
         width: 1200px;
@@ -206,6 +207,7 @@ export default {
             line-height: 60px;
             padding: 0 10px;
             font-size: 16px;
+            cursor: pointer;
             .last-border {
                 padding: 5px;
                 border: 1px solid rgba(139,14,234,1);
@@ -238,6 +240,7 @@ export default {
             font-size: 14px;
             line-height: 40px;
             text-align: center;
+            cursor: pointer;
         }
     }
 }
