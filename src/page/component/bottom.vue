@@ -1,33 +1,17 @@
 <template>
     <footer class="bottom"> 
-        <section class="content clear   ">
+        <section class="content clear">
             <!-- 代运营 -->
-            <ul @mouseleave="leaveSubNav" 
-                class="sub-nav" >
-                <li v-for="(con,num) in operationList" 
-                    :key="num"
-                    :class="currentSubIndex == num ? 'active-color' :''"
-                    @mouseenter="enterEvent(num,'sub')"
-                    @mouseleave="leaveEvent('sub')" 
-                >{{ con }}</li>
+            <ul class="sub-nav" >
+                <li v-for="(con,num) in operationList" :key="num">{{ con }}</li>
             </ul>
             <!-- 运营推广 -->
-            <ul @mouseleave="leaveSubNav" 
-                class="sub-nav" >
-                <li v-for="(con,num) in spreadList" 
-                    :key="num"
-                    :class="currentSubIndex == num ? 'active-color' :''"
-                    @mouseenter="enterEvent(num,'sub')"
-                    @mouseleave="leaveEvent('sub')" >{{ con }}</li>
+            <ul class="sub-nav" >
+                <li v-for="(con,num) in spreadList" :key="num" >{{ con }}</li>
             </ul>
             <!-- 联系我们 -->
-            <ul @mouseleave="leaveSubNav" 
-                class="sub-nav" >
-                <li v-for="(con,num) in concatusList" 
-                    :key="num"
-                    :class="currentSubIndex == num ? 'active-color' :''"
-                    @mouseenter="enterEvent(num,'sub')"
-                    @mouseleave="leaveEvent('sub')" >{{ con }}</li>
+            <ul class="sub-nav" >
+                <li v-for="(con,num) in concatusList" :key="num">{{ con }}</li>
             </ul>
         </section>
         <!-- 二维码 -->
@@ -46,16 +30,16 @@ export default {
             //运营推广
             spreadList: ["营运推广","店铺诊断","打造爆款","电商设计","直通车托管","店铺代入驻"],
             //联系我们
-            concatusList: ["联系我们","电话: 17188388380","微信: cctt23456", "QQ: 610351996", "地址: 四川省成都市新都区斑竹园镇北欧3G广场3栋11楼11号"]
+            concatusList: ["联系我们","电话: 17188388380","微信: cctt23456", "QQ: 610351996", "地址: 四川省成都市新都区斑竹园镇北欧3G广场3栋11楼11号"],
         }
-    },
+    }
 }
 </script>
 
 <style lang="scss" scoped>
 .bottom {
-    margin: 20px auto 0;
-    width: 1200px;
+    margin: 0px auto;
+    width: 100%;
     background-color: #ff4200;
     letter-spacing: 2px;
     .content {
@@ -74,10 +58,9 @@ export default {
         color: #fff;
         font-size: 16px;
         line-height: 30px;
-        max-width: 240px;
+        max-width: 250px;
         word-break: break-all;
         word-wrap: break-word;
-        cursor: pointer;
         &:nth-of-type(1) {
             font-size: 25px;
             font-weight: 600;

@@ -1,8 +1,6 @@
 <template>
     <!-- 版心布局 1200 -->
     <div class="home">
-        <!-- 头部 -->
-        <header-fix></header-fix>
         <!-- 轮播图 -->
         <section class="carousel">
             <el-carousel :autoplay="true" indicator-position="none">
@@ -42,7 +40,7 @@
                 <p>Professional things,to do professional people</p> 
             </header>
             <!-- whyme -->
-            <img width="1200" src="../../img/other/whyMe.jpg" />
+            <img src="../../img/other/whyMe.jpg" />
         </section>
         <!-- 运营流程 -->
         <section class="operation-list">
@@ -50,7 +48,7 @@
                 <p>运营流程</p> 
                 <p>分为6个阶段</p> 
             </header>
-            <img class="operation-content" width="1000" src="../../img/other/operation-content.jpg" />
+            <img class="operation-content" src="../../img/other/operation-content.jpg" />
         </section>
         <!-- 免费检查 -->
         <section class="free-check">
@@ -89,20 +87,11 @@
                 </el-form>
             </section>
         </section>
-        <!-- 底部 -->
-        <bottom></bottom>
     </div>
 </template>
 
 <script>
-    import headerFix from "../component/header.vue";
-    import bottom from "../component/bottom.vue";
-
     export default {
-        components: {
-            headerFix,
-            bottom
-        },
         data(){
             return {
                 //图片数据
@@ -226,7 +215,8 @@
 //热点服务
 .star-service {
     margin: 40px auto 0;
-    width: 1200px;
+    width: 100vw;
+    padding: 0 100px;
     // background-color: #f4f4f4;
     text-align: center;
     .star-service-head {
@@ -282,13 +272,18 @@
 //选择理由
 .reason-list {
     margin: 40px auto 0;
-    width: 1200px;
-    background-color: #f4f4f4;
+    width: 100vw;
+    padding: 0 100px;
+    background-color: #fff;
+    img {
+        width: 100%;
+    }
 }
 .title {
     height: 140px;
     text-align: center;
     background-color: #ff4200;
+    margin: 0 -100px;
     > p {
         height: 70px;
         color: #fff;
@@ -304,25 +299,30 @@
 }
 //运营流程
 .operation-list {
-    margin: 40px auto 0;
-    width: 1200px;
+    margin: 0 auto;
+    width: 100vw;
+    padding: 0 100px;
     background-color: #f4f4f4;
     .title {
         height: 140px;
     }
     .operation-content {
-        margin: 40px 100px;
-        padding: 50px;
+        // margin: 40px 100px;
+        // padding: 50px;
+        padding-top: 20px;
+        width: 100%;
         padding-bottom: 0px;
     }
 }
 //免费体检
 .free-check {
-    margin: 40px auto 0;
-    width: 1200px;
+    margin: 0 auto;
+    width: 100vw;
+    padding: 20px 100px 0;
     background-color: #f4f4f4;
     .free-img {
-        width: 100%;
+        width: 125%;
+        margin: 0 -100px;
     }
     .form-list {
         margin-top: 50px;
