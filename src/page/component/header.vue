@@ -1,83 +1,86 @@
 <template>
     <!-- 头部 -->
     <!-- 解决吸顶跳动的问题 -->
-    <section id="header-fixed" :class="[headerFixed ? 'issFixed' : '','header']">
-        <div class="header-content">
-            <!-- logo区域 -->
-            <h1 class="logo">
-                <a href="#">
-                    <img src="../../img/banner/logo.png" />
-                </a>
-            </h1>
-            <!-- 主导航 -->
-            <ul class="nav" @mouseleave="leaveNav">
-                <template v-for="(item,index) in navList">
-                    <li v-if="index !== navList.length - 1" 
-                        @mouseenter="enterEvent(index,'main')"
-                        @mouseleave="leaveEvent"
-                        @click="jumpPageUrl(item.url)"
-                        :key="index"
-                        :class="currentIndex == index || activeIndex == index ? 'active-color' :''">
-                        <span>{{ item.name }}</span>
-                    </li>
-                    <li v-else :key="index">
-                        <span class="last-border">{{ item.name }}</span>    
-                    </li>
-                </template>
-                <!-- 子导航 -->
-                <div>
-                    <!-- 代运营子导航 -->
-                    <template v-if="currentIndex == 1 && moveToFlag">
-                        <ul @mouseleave="leaveSubNav" 
-                            class="sub-nav operation-list" >
-                            <li v-for="(con,num) in operationList" 
-                                :key="num"
-                                :class="currentSubIndex == num ? 'active-color' :''"
-                                @click="jumpPageUrl('operate')"
-                                @mouseenter="enterEvent(num,'sub')"
-                                @mouseleave="leaveEvent('sub')" >{{ con }}</li>
-                        </ul>
+    <div>
+        <section id="header-fixed" class='header issFixed'>
+            <div class="header-content">
+                <!-- logo区域 -->
+                <h1 class="logo">
+                    <a href="#">
+                        <img src="../../img/banner/logo.png" />
+                    </a>
+                </h1>
+                <!-- 主导航 -->
+                <ul class="nav" @mouseleave="leaveNav">
+                    <template v-for="(item,index) in navList">
+                        <li v-if="index !== navList.length - 1" 
+                            @mouseenter="enterEvent(index,'main')"
+                            @mouseleave="leaveEvent"
+                            @click="jumpPageUrl(item.url)"
+                            :key="index"
+                            :class="currentIndex == index || activeIndex == index ? 'active-color' :''">
+                            <span>{{ item.name }}</span>
+                        </li>
+                        <li v-else :key="index">
+                            <span class="last-border">{{ item.name }}</span>    
+                        </li>
                     </template>
-                    <!-- 平台设计子导航 -->
-                    <template v-else-if="currentIndex == 2 && moveToFlag">
-                        <ul @mouseleave="leaveSubNav"
-                            class="sub-nav plane-design" >
-                            <li v-for="(con,num) in planeDesignList" 
-                                :key="num"
-                                :class="currentSubIndex == num ? 'active-color' :''"
-                                @click="jumpPageUrl('plane-design')"
-                                @mouseenter="enterEvent(num,'sub')"
-                                @mouseleave="leaveEvent('sub')">{{ con }}</li>
-                        </ul>
-                    </template>
-                    <!-- 电商培训子导航 -->
-                    <template v-else-if="currentIndex == 3 && moveToFlag">
-                        <ul @mouseleave="leaveSubNav"
-                            class="sub-nav e-train" >
-                            <li v-for="(con,num) in eTrainList" 
-                                :key="num"
-                                :class="currentSubIndex == num ? 'active-color' :''"
-                                @click="jumpPageUrl('e-train')"
-                                @mouseenter="enterEvent(num,'sub')"
-                                @mouseleave="leaveEvent('sub')">{{ con }}</li>
-                        </ul>
-                    </template>
-                    <!-- 数据服务子导航 -->
-                    <template v-else-if="currentIndex == 5 && moveToFlag">
-                        <ul @mouseleave="leaveSubNav"
-                            class="sub-nav data-service">
-                            <li v-for="(con,num) in dataServiceList" 
-                                :key="num"
-                                :class="currentSubIndex == num ? 'active-color' :''"
-                                @click="jumpPageUrl('data-service')"
-                                @mouseenter="enterEvent(num,'sub')"
-                                @mouseleave="leaveEvent('sub')">{{ con }}</li>
-                        </ul>
-                    </template>
-                </div>
-            </ul>            
-        </div>
-    </section>
+                    <!-- 子导航 -->
+                    <div>
+                        <!-- 代运营子导航 -->
+                        <template v-if="currentIndex == 1 && moveToFlag">
+                            <ul @mouseleave="leaveSubNav" 
+                                class="sub-nav operation-list" >
+                                <li v-for="(con,num) in operationList" 
+                                    :key="num"
+                                    :class="currentSubIndex == num ? 'active-color' :''"
+                                    @click="jumpPageUrl('operate')"
+                                    @mouseenter="enterEvent(num,'sub')"
+                                    @mouseleave="leaveEvent('sub')" >{{ con }}</li>
+                            </ul>
+                        </template>
+                        <!-- 平台设计子导航 -->
+                        <template v-else-if="currentIndex == 2 && moveToFlag">
+                            <ul @mouseleave="leaveSubNav"
+                                class="sub-nav plane-design" >
+                                <li v-for="(con,num) in planeDesignList" 
+                                    :key="num"
+                                    :class="currentSubIndex == num ? 'active-color' :''"
+                                    @click="jumpPageUrl('plane-design')"
+                                    @mouseenter="enterEvent(num,'sub')"
+                                    @mouseleave="leaveEvent('sub')">{{ con }}</li>
+                            </ul>
+                        </template>
+                        <!-- 电商培训子导航 -->
+                        <template v-else-if="currentIndex == 3 && moveToFlag">
+                            <ul @mouseleave="leaveSubNav"
+                                class="sub-nav e-train" >
+                                <li v-for="(con,num) in eTrainList" 
+                                    :key="num"
+                                    :class="currentSubIndex == num ? 'active-color' :''"
+                                    @click="jumpPageUrl('e-train')"
+                                    @mouseenter="enterEvent(num,'sub')"
+                                    @mouseleave="leaveEvent('sub')">{{ con }}</li>
+                            </ul>
+                        </template>
+                        <!-- 数据服务子导航 -->
+                        <template v-else-if="currentIndex == 5 && moveToFlag">
+                            <ul @mouseleave="leaveSubNav"
+                                class="sub-nav data-service">
+                                <li v-for="(con,num) in dataServiceList" 
+                                    :key="num"
+                                    :class="currentSubIndex == num ? 'active-color' :''"
+                                    @click="jumpPageUrl('data-service')"
+                                    @mouseenter="enterEvent(num,'sub')"
+                                    @mouseleave="leaveEvent('sub')">{{ con }}</li>
+                            </ul>
+                        </template>
+                    </div>
+                </ul>            
+            </div>
+        </section>
+        <section class="header"></section>
+    </div>
 </template>
 
 <script>
@@ -120,6 +123,9 @@ export default {
                     case 'operate':
                         this.activeIndex = 1;
                     break;
+                    case 'data-service':
+                        this.activeIndex = 5;
+                    break;
                     default:
                         this.activeIndex = 0;
                     break;
@@ -129,16 +135,16 @@ export default {
     },
     mounted() {
 		// 监听dom渲染完成
-		this.$nextTick(function(){
-            // 这里fixedHeaderRoot是吸顶元素的ID
-            let header = document.getElementById("header-fixed");
-            // 这里要得到top的距离和元素自身的高度
-            this.offsetTop = header.offsetTop;
-            this.offsetHeight = header.offsetHeight;
+		// this.$nextTick(function(){
+        //     // 这里fixedHeaderRoot是吸顶元素的ID
+        //     let header = document.getElementById("header-fixed");
+        //     // 这里要得到top的距离和元素自身的高度
+        //     this.offsetTop = header.offsetTop;
+        //     this.offsetHeight = header.offsetHeight;
             
-		});
-	    // handleScroll为页面滚动的监听回调
-		window.addEventListener('scroll', this.handleScroll);
+		// });
+	    // // handleScroll为页面滚动的监听回调
+		// window.addEventListener('scroll', this.handleScroll);
 	},
     methods: {
         //跳转页面
@@ -185,7 +191,7 @@ export default {
         }
     },
     destroyed(){
-		window.removeEventListener('scroll', this.handleScroll);
+		// window.removeEventListener('scroll', this.handleScroll);
 	},
 }
 </script>
@@ -202,9 +208,10 @@ export default {
 // }
 .header {
     width: 100%;
+    height: 60px;
     background-color: #fff;
     &.issFixed {
-        position: sticky;
+        position: fixed;
         top:0px;
         left:0px;
         z-index: 1000;
