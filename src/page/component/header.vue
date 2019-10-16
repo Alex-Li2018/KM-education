@@ -34,7 +34,7 @@
                                 <li v-for="(con,num) in operationList" 
                                     :key="num"
                                     :class="currentSubIndex == num ? 'active-color' :''"
-                                    @click="jumpPageUrl('operate')"
+                                    @click="jumpPageUrl('operate',con)"
                                     @mouseenter="enterEvent(num,'sub')"
                                     @mouseleave="leaveEvent('sub')" >{{ con }}</li>
                             </ul>
@@ -46,7 +46,7 @@
                                 <li v-for="(con,num) in planeDesignList" 
                                     :key="num"
                                     :class="currentSubIndex == num ? 'active-color' :''"
-                                    @click="jumpPageUrl('plane-design')"
+                                    @click="jumpPageUrl('plane-design', con)"
                                     @mouseenter="enterEvent(num,'sub')"
                                     @mouseleave="leaveEvent('sub')">{{ con }}</li>
                             </ul>
@@ -148,9 +148,12 @@ export default {
 	},
     methods: {
         //跳转页面
-        jumpPageUrl(url) {
+        jumpPageUrl(url, desc = "") {
+            // 是否是京东的代运营
+            let jdFlag = desc.includes("京东")
             let flag = url.includes('#')
-            !flag && this.$router.push({ path: url })
+            let urlPath = jdFlag ? 'operate-jd' : url
+            !flag && this.$router.push({ path: urlPath })
         },
         //吸顶效果
         handleScroll(){

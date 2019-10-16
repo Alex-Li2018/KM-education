@@ -54,7 +54,11 @@
                 </h2>
                 <section class="through-train-content">
                     <ul>
-                        <li v-for="(item, index) in throughTrainList" :key="index">
+                        <li v-for="(item, index) in throughTrainList" 
+                            :key="index"
+                            :class="animateId == index ? 'breathing-light' : ''"
+                            @mouseenter="breathingLightEnter(index)" 
+                            @mouseleave="breathingLightleave">
                             <h3>{{ item.tit }}</h3>
                             <p class="line"></p>
                             <p class="desc">{{ item.desc }}</p>
@@ -87,7 +91,10 @@
 </template>
 
 <script>
+import breathingLightMixin from "../../mixin/breathing-light.js"
+
 export default {
+    mixins: [breathingLightMixin],
     data() {
         return {
             doAnthingList: {
@@ -103,11 +110,11 @@ export default {
                 ]
             },
             planeLsit: [
-                { src: require("../../img/data-service/icon/icon_03.png"), tit: "团队拥有丰富的直通车运营经验,洞悉电子商务发展趋势" },
-                { src: require("../../img/data-service/icon/icon_03.png"), tit: "全面的市场分析人员通过数据分析,选择优质推广宝贝" },
+                { src: require("../../img/data-service/icon/icon_01.png"), tit: "团队拥有丰富的直通车运营经验,洞悉电子商务发展趋势" },
+                { src: require("../../img/data-service/icon/icon_02.png"), tit: "全面的市场分析人员通过数据分析,选择优质推广宝贝" },
                 { src: require("../../img/data-service/icon/icon_03.png"), tit: "结合买家搜索行为以及淘宝搜索规律,选择关键词" },
-                { src: require("../../img/data-service/icon/icon_03.png"), tit: "在直通车的运营推广,技术搜索优先领域具备核心竞争" },
-                { src: require("../../img/data-service/icon/icon_03.png"), tit: "由全面的淘宝直通车推广团队快速定制个性化方案" },
+                { src: require("../../img/data-service/icon/icon_04.png"), tit: "在直通车的运营推广,技术搜索优先领域具备核心竞争" },
+                { src: require("../../img/data-service/icon/icon_05.png"), tit: "由全面的淘宝直通车推广团队快速定制个性化方案" },
             ],
             throughTrainList: [
                 { tit: '量身定做', desc: '我们根据店铺的类目以及经营状况,制定一套适合店铺发展的方案'},
@@ -127,8 +134,7 @@ export default {
                 { tit: '第七步', subTit: '优化关键词', step: [{desc: '1.关键词的提升,降价操作'},{desc: '2.关键词的删除,添加操作'},{desc: '3.关键词的匹配方式修改'}] }
             ]
         }
-    },
-
+    }
 }
 </script>
 
@@ -212,22 +218,25 @@ export default {
             }
         }
         .plane-content {
+            padding: 0 100px;
             ul {
                 // width: 100vw;
-                // display: flex;
+                display: flex;
                 margin: 0 auto;
+                justify-content: space-between;
                 li {
                     display: inline-block;
-                    width: 210px;
-                    height: 210px;
+                    width: 180px;
+                    height: 180px;
                     border-radius: 50%;
                     border: 1px solid #e7e7e7;
-                    margin-left: 50px;
+                    // margin-left: 50px;
                     text-align: center;
                     position: relative;
                     background-color: #f5f5f5;
+                    transition: all .2s;
                     img {
-                        width: 100px;
+                        width: 44px;
                         padding-top: 20px;
                     }
                     span {
@@ -262,7 +271,7 @@ export default {
                 padding: 40px 20px;
                 box-sizing: content-box;
                 text-align: center;
-                margin: 10px 0 10px 10px;
+                margin: 10px 0 30px 10px;
                 position: relative;
                 letter-spacing: 2px;
                 &:nth-of-type(2n + 1) {
@@ -347,6 +356,10 @@ export default {
             }
         }
    }
+}
+.breathing-light {
+    transform: translateY(-20px);
+    transition: all .2s;
 }
 </style>
 
