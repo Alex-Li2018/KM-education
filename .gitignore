@@ -1,3 +1,6 @@
 # 不提交的文件
-node_modules/
-dist/
+app/node_modules/
+app/dist/
+app/yarn.lock
+service/node_modules/
+service/yarn.lock

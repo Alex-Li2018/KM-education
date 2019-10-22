@@ -15,9 +15,12 @@ module.exports = {
         // 找包的顺序是从当前的node_modules下开始寻找，找不到会从外层再去寻找，我们可以使用module字段来指定找包的范围
         modules: [path.join(__dirname, '../node_modules')],
         alias: {
-            'vue$': 'vue/dist/vue.common.js',
-            '@': path.resolve(__dirname, '../src'),
-            "@component": path.resolve(__dirname, "../src/page/component")
+          'vue$': 'vue/dist/vue.common.js',
+          '@': path.resolve(__dirname, '../src'),
+          "@component": path.resolve(__dirname, "../src/page/component"),
+          "@until": path.resolve(__dirname, "../src/until"),
+          "@mixin": path.resolve(__dirname, "../src/mixin"),
+          "@API": path.resolve(__dirname, "../src/api")
         }
     },
     module: {
