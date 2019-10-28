@@ -1,12 +1,12 @@
 <template>
     <div>
         <!-- 头部 -->
-        <header-fix></header-fix>
+        <header-fix v-if="isShow"></header-fix>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
         <!-- 底部 -->
-        <bottom></bottom>
+        <bottom v-if="isShow"></bottom>
     </div>
 </template>
 <script>
@@ -20,7 +20,13 @@ export default {
     },
     data(){
         return {
-            
+           isShow: true 
+        }
+    },
+    watch: {
+        $route(newVal) {
+            this.isShow = newVal.meta.admin ? false : true;
+            console.log(newVal)
         }
     }
 }

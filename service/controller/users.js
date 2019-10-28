@@ -1,13 +1,13 @@
 const { exec, escape } = require('../db/mysql.js')
 
 //登录
-const login = (phoneNum) => {
-
+const login = (loginInfo) => {
+    let { username, password } = loginInfo;
     const sql = `
-        select * from users where phonenumber=${phoneNum};
+    select username from users where username = '${username}' and password = '${password}';
     `
 
-    return exec(sql).then(rows => {console.log(rows)
+    return exec(sql).then(rows => {
         return rows[0] || {}
     })
 }
