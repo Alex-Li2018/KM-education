@@ -13,16 +13,24 @@
                 <!-- 主导航 -->
                 <ul class="nav" @mouseleave="leaveNav">
                     <template v-for="(item,index) in navList">
-                        <li v-if="index !== navList.length - 1" 
+                        <li v-if="index == navList.length - 1"
+                            @mouseenter="enterEvent(index,'main')"
+                            @mouseleave="leaveEvent"
+                            @click="jumpPageUrl(item.url)"
+                            :key="index">
+                            <img v-if="isLoginFlag" src="../../img/icon/login-active.png" />
+                            <img v-else src="../../img/icon/login.png" />
+                        </li>
+                        <li v-else-if="index == navList.length - 2" :key="index">
+                            <span class="last-border">{{ item.name }}</span>    
+                        </li>
+                        <li v-else 
                             @mouseenter="enterEvent(index,'main')"
                             @mouseleave="leaveEvent"
                             @click="jumpPageUrl(item.url)"
                             :key="index"
                             :class="currentIndex == index || activeIndex == index ? 'active-color' :''">
                             <span>{{ item.name }}</span>
-                        </li>
-                        <li v-else :key="index">
-                            <span class="last-border">{{ item.name }}</span>    
                         </li>
                     </template>
                     <!-- 子导航 -->
@@ -97,8 +105,8 @@ export default {
                 { name: "成功案例", url: "#"}, 
                 { name: "新闻动态", url: "#"}, 
                 { name: "柯明教育的优势", url: "#"}, 
-                { name: "后台管理", url: "/login"},
-                { name: "免费诊断店铺", url: "#"}],
+                { name: "免费诊断店铺", url: "#"},
+                { name: "后台管理", url: "admin/free-check"}],
             operationList: [ "淘宝代运营", "天猫代运营", "1688代运营", "拼多多代运营", "京东代运营", "直通车代运营"], //代运营
             planeDesignList: [ "店铺装修设计", "宝贝主图设计", "详情页设计", "推广车图设计", "logo设计", "其他单品设计" ], //平面设计
             eTrainList: [ "淘宝开店创业班", "高级推广运营班", "电商美工提升班", "企业内训精英班", "一对一定制高班" ], //电商培训
@@ -109,7 +117,8 @@ export default {
             moveToFlag: 0, //移出子导航
             headerFixed: 0, //吸顶的效果
             offsetTop: 0,
-            offsetHeight: 0
+            offsetHeight: 0,
+            isLoginFlag: false
         }
     },
     watch: {
@@ -133,6 +142,10 @@ export default {
                 }
             }
         }
+    },
+    created() {
+        this.isLoginFlag = sessionStorage.getItem('isLogin') || false;
+        console.log(this.isLoginFlag)
     },
     mounted() {
 		// 监听dom渲染完成
@@ -255,9 +268,14 @@ export default {
             padding: 0 10px;
             font-size: 16px;
             cursor: pointer;
+            position: relative;
             .last-border {
                 padding: 5px;
                 border: 1px solid rgba(139,14,234,1);
+            }
+            img {
+                width: 30px;
+                @include center;
             }
         }
     }

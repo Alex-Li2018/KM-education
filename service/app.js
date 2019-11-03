@@ -14,6 +14,7 @@ const freeConsultationRouter = require('./routes/free-consultation');
 const usersRouter = require('./routes/users');
 const uploadRouter = require("./routes/upload");
 const staticRouter = require('./routes/static');
+const bannerRouter = require('./routes/banner');
 
 //实例一个express的app
 let app = express();
@@ -66,6 +67,7 @@ app.use('/free-consultation', freeConsultationRouter);
 app.use('/user', usersRouter);
 app.use('/upload', uploadRouter);
 app.use('/static', staticRouter);
+app.use('/banner', bannerRouter);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

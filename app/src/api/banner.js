@@ -1,6 +1,6 @@
-// 登录部分
-export function loginAPI(params) {
-    let url = `user/login`;
+// 新增banner信息
+export function insertBannerAPI(params) {
+    let url = `banner/insert`;
     let data = Object.assign({}, params);
 
     return $Http.post(url,data)
@@ -12,9 +12,8 @@ export function loginAPI(params) {
         })
 }
 
-// 删除用户
-export function deleteUserAPI(params) {
-    let url = `user/delete`;
+export function upadteBannerAPI(params) {
+    let url = `banner/update`;
     let data = Object.assign({}, params);
 
     return $Http.post(url,data)
@@ -26,9 +25,8 @@ export function deleteUserAPI(params) {
         })
 }
 
-// 查询用户信息
-export function queryUserAPI(params) {
-    let url = `user/query`;
+export function queryBannerAPI(params) {
+    let url = `banner/query`;
     let data = Object.assign({}, params);
 
     return $Http.get(url,data)

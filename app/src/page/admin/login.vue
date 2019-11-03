@@ -23,6 +23,8 @@
 
 <script>
 import { loginAPI } from "@API/login"
+import { mutations, store } from '../../store/store'
+
 export default {
     data() {
       const checkusername = (rule, value, callback) => {
@@ -42,15 +44,6 @@ export default {
           callback();
         }
       };
-    //   const validatePassCopy = (rule, value, callback) => {
-    //     if (value === '') {
-    //       callback(new Error('请再次输入密码'));
-    //     } else if (value !== this.ruleForm.pass) {
-    //       callback(new Error('两次输入密码不一致!'));
-    //     } else {
-    //       callback();
-    //     }
-    //   };
       return {
         ruleForm: {
           pass: '',
@@ -74,9 +67,14 @@ export default {
               password: pass
             }
             loginAPI(params).then(res => {
-              let { code } = res;
+              let { code, data } = res;
               if(code == 200) {
-                this.$router.push({ name: 'Admin'});
+                mutations.setName(data.username);
+                // 同时将数据存入sessionStorage中
+                sessionStorage.setItem('isLogin', true);
+                this.$router.push({ path: '/admin/free-check', });
+              } else {
+                sessionStorage.setItem('isLogin', false);
               }
             });
           } else {

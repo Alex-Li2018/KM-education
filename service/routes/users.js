@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 //引入sql的操作
-const { login, createUser } = require('../controller/users')
+const { login, createUser, queryUser, deleteUser } = require('../controller/users')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 const token = require('../untils/token')
 
@@ -46,6 +46,7 @@ router.post('/create', function(req, res, next) {
   })
 });
 
+// 登录
 router.post('/login', function(req, res, next) {
   let { username, password } = req.body;
   let flag = false;
@@ -74,13 +75,44 @@ router.post('/login', function(req, res, next) {
       //设置token
       token.setToken({username,res});
       res.json(
-        new SuccessModel("登陆成功")
+        new SuccessModel(data)
       )
     } else {
       res.json(
         new ErrorModel("登陆失败")
       )
     }
+  })
+});
+
+//删除
+router.post('/delete', function(req, res, next) {
+  
+  deleteUser(req.body).then(data => {
+    console.log(data)
+
+    // affectedRows 影响的函数
+    let { affectedRows } = data;
+
+    if(affectedRows == 1) {
+      res.json(
+        new SuccessModel("删除用户成功!")
+      )
+    } else {
+        res.json(
+          new ErrorModel("删除用户失败!")
+        )
+    }
+  })
+});
+
+// 查询
+router.get('/query', function(req, res, next) {
+  
+  queryUser().then(data => {
+    res.json(
+      new SuccessModel(data)
+    )
   })
 });
 

@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 //引入sql的操作
-const { createFreeConsultation } = require('../controller/free-consultation')
+const { queryFreeConsultation, createFreeConsultation } = require('../controller/free-consultation')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 
-router.post('/', function(req, res, next) {
+router.post('/create', function(req, res, next) {
   
   /* 标注其中的 
     shopplatform: 
@@ -34,6 +34,26 @@ router.post('/', function(req, res, next) {
           new ErrorModel("咨询数据插入失败")
         )
     }
+  })
+});
+
+router.get('/query', function(req, res, next) {
+  
+  queryFreeConsultation(req.query).then(data => {
+    let total = data.length ? data[0]['(select count(*) from freeconsultation)'] : 0;
+    let { pageSize, pageIndex } = req.query;
+    let pargData = Object.assign({ total }, { pageSize: +pageSize, pageIndex: +pageIndex });
+    data.length && data.forEach(_ => {
+      delete _['(select count(*) from freeconsultation)']
+    })
+    console.log(req.query);
+    let list = {
+      list: data,
+      pargData
+    }
+    res.json(
+      new SuccessModel(list)
+    )
   })
 });
 

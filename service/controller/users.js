@@ -12,6 +12,17 @@ const login = (loginInfo) => {
     })
 }
 
+// 查询用户
+const queryUser = () => {
+    const sql = `select * from users`
+    return exec(sql).then(rows => {
+        return rows || {};
+    })
+    .catch(res => {
+        return res;
+    })
+}
+
 //创建用户
 const createUser = (userInfo) => {
     let { nickname, username, password } = userInfo;
@@ -29,7 +40,24 @@ const createUser = (userInfo) => {
         })
 }
 
+// 删除用户
+const deleteUser = (userInfo) => {
+    let { nickname, username } = userInfo;
+
+    const sql = `DELETE FROM users WHERE nickname = '${nickname}' and username = '${username}' and state = 0`
+
+    return exec(sql).then(rows => { 
+            return rows || {};
+        })
+        .catch(res => {
+            console.log(res)
+            return res;
+        })
+}
+
 module.exports = {
     login,
-    createUser
+    createUser,
+    queryUser,
+    deleteUser
 }
