@@ -2,7 +2,7 @@
     <!-- 头部 -->
     <!-- 解决吸顶跳动的问题 -->
     <div>
-        <section id="header-fixed" class='header issFixed'>
+        <section id="header-fixed" :class='[srcollFlag ? "srcoll-active" : "","header issFixed"]'>
             <div class="header-content">
                 <!-- logo区域 -->
                 <h1 class="logo">
@@ -21,7 +21,7 @@
                             <img v-if="isLoginFlag" src="../../img/icon/login-active.png" />
                             <img v-else src="../../img/icon/login.png" />
                         </li>
-                        <li v-else-if="index == navList.length - 2" :key="index">
+                        <li @click="showDialog" v-else-if="index == navList.length - 2" :key="index">
                             <span class="last-border">{{ item.name }}</span>    
                         </li>
                         <li v-else 
@@ -92,6 +92,8 @@
 </template>
 
 <script>
+import { mutations } from "../../store/store"
+
 export default {
     data(){
         return {
@@ -115,10 +117,8 @@ export default {
             currentSubIndex: -1, //子导航的位置
             activeIndex: 0, //当前激活的导航
             moveToFlag: 0, //移出子导航
-            headerFixed: 0, //吸顶的效果
-            offsetTop: 0,
-            offsetHeight: 0,
-            isLoginFlag: false
+            isLoginFlag: false,
+            srcollFlag: false, // 滚动吸顶的效果
         }
     },
     watch: {
@@ -148,17 +148,8 @@ export default {
         console.log(this.isLoginFlag)
     },
     mounted() {
-		// 监听dom渲染完成
-		// this.$nextTick(function(){
-        //     // 这里fixedHeaderRoot是吸顶元素的ID
-        //     let header = document.getElementById("header-fixed");
-        //     // 这里要得到top的距离和元素自身的高度
-        //     this.offsetTop = header.offsetTop;
-        //     this.offsetHeight = header.offsetHeight;
-            
-		// });
-	    // // handleScroll为页面滚动的监听回调
-		// window.addEventListener('scroll', this.handleScroll);
+	    // handleScroll为页面滚动的监听回调
+		window.addEventListener('scroll', this.handleScroll);
 	},
     methods: {
         //跳转页面
@@ -172,11 +163,8 @@ export default {
         //吸顶效果
         handleScroll(){
             // 得到页面滚动的距离
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop ||document.body.scrollTop;						
-            // 解决吸顶跳动的问题
-            // let scrollTop = this.$refs.pride_tab_fixed.getBoundingClientRect().top
-            // 判断页面滚动的距离是否大于吸顶元素的位置
-            this.headerFixed = scrollTop > this.offsetHeight;
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop ||document.body.scrollTop;
+            this.srcollFlag = scrollTop > 10;
 		},
         //移入事件
         enterEvent(index, flag) {
@@ -205,6 +193,10 @@ export default {
         leaveSubNav() {
             this.moveToFlag = 0
             this.currentIndex = this.activeIndex
+        },
+        // 打开弹窗
+        showDialog() {
+            mutations.setShowDialog('true');
         }
     },
     destroyed(){
@@ -314,6 +306,9 @@ export default {
     & > span {
         color: red;
     }
+}
+.srcoll-active {
+    box-shadow: 0 0 5px #888;
 }
 </style>
 

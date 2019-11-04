@@ -7,20 +7,30 @@
         </keep-alive>
         <!-- 底部 -->
         <bottom v-if="isShow"></bottom>
+        <!-- 免费检查弹窗 -->
+        <free-check-dialog :show="showDialogComputed"></free-check-dialog>
     </div>
 </template>
 <script>
 import headerFix from "./page/component/header.vue";
 import bottom from "./page/component/bottom.vue";
+import freeCheckDialog from "./page/component/freeCheckDialog.vue";
+import { store } from "./store/store";
 
 export default {
     components: {
         headerFix,
-        bottom
+        bottom,
+        freeCheckDialog
     },
     data(){
         return {
            isShow: true 
+        }
+    },
+    computed: {
+        showDialogComputed() {
+            return JSON.parse(store.showDialog);
         }
     },
     watch: {

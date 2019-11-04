@@ -17,7 +17,6 @@ const queryBanner = () => {
 const insertBanner = (bannerInfo) => {
     let { bannerUrl, type, name } = bannerInfo;
     let createtime = new Date().getTime();
-    console.log(bannerInfo)
     const sql = "insert into banner(banner_url,type,name,state, create_time)" +
                 `values ('${bannerUrl}', '${type}', '${name}', 1, '${createtime}')`
 

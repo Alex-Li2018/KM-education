@@ -100,14 +100,16 @@
                     <el-form-item label="您的店铺在以下哪个平台">
                         <el-radio-group v-model="form.platform">
                             <template v-for="item in platformList">
-                                <el-radio :key="item.id" :label="item.label"></el-radio>
+                                <el-radio :key="item.id" :label="item.id">{{ item.label }}</el-radio>
                             </template>
                         </el-radio-group>
                     </el-form-item>
-                    <el-form-item v-model="form.service" label="有没有想了解的服务">
-                        <template v-for="item in serviceList">
-                            <el-radio :key="item.id" :label="item.label"></el-radio>
-                        </template>
+                    <el-form-item label="有没有想了解的服务">
+                        <el-radio-group v-model="form.service">
+                            <template v-for="item in serviceList">
+                                <el-radio :key="item.id" :label="item.id">{{ item.label }}</el-radio>
+                            </template>
+                        </el-radio-group>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit">免费诊断店铺</el-button>
@@ -129,7 +131,7 @@ export default {
         const validateLink = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请填写联系方式'));
-            } else if (!isPhone(isPhone)) {
+            } else if (isPhone(isPhone)) {
                 callback(new Error('请输入正确的手机号码'));
             } else {
                 callback();
@@ -238,7 +240,7 @@ export default {
     methods: {
         // 提交
         onSubmit() {
-            this.$refs[formName].validate((valid) => {
+            this.$refs['ruleForm'].validate((valid) => {
                 if (valid) {
                     let params = {
                         "concatlink": this.form.link, 
@@ -248,7 +250,12 @@ export default {
                         "wantservice": this.form.service
                     }
                     freeCheckAPI(params).then(res => {
-                        console.log(res);
+                        this.$notify({
+                            title: '成功',
+                            message: '数据新增成功',
+                            type: 'success'
+                        });
+                        this.$refs['ruleForm'].resetFields();
                     })
                 } else {
                     console.log('error submit!!');

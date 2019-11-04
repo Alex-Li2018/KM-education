@@ -32,11 +32,11 @@ module.exports = smart(base,{
             new UglifyJsPlugin({
                 sourceMap: true, //源码隐射
                 parallel: true, //并发打包
-                uglifyOptions: {
-                    ecma: 7, //支持ECMA8规范
-                    drop_console: true, //移出console
-                    drop_debugger: true, //移出debugger
-                }
+                // uglifyOptions: {
+                //     ecma: 7, //支持ECMA8规范
+                //     drop_console: true, //移出console
+                //     drop_debugger: true, //移出debugger
+                // }
             })
         ]
     },

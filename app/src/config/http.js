@@ -1,4 +1,6 @@
 import axios from 'axios'
+import router from "../router/router"
+import { mutations } from "../store/store"
 
 // 创建axios实例
 var instance = axios.create({    timeout: 1000 * 12});
@@ -19,9 +21,10 @@ instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlenco
 const $Http = {
     //get请求
     get(url, params) {
-        return new Promise((resolve, reject) =>{        
+        return new Promise((resolve, reject) =>{
+            let vaildParams = Object.assign({ t: new Date().getTime() }, params);       
             instance.get(url, {            
-                params: params        
+                params: vaildParams        
             }).then(res => {
                 resolve(res);
             }).catch(err =>{
@@ -42,5 +45,33 @@ const $Http = {
         });
     }
 }
+
+// 统一拦截响应
+// http response 拦截器
+instance.interceptors.response.use(
+    response => {
+      //拦截响应，做统一处理 
+      if (response.data.code) {
+        switch (response.data.code) {
+          case 401:
+            // store.state.isLogin = false
+            // 登录状态为没有登录
+            mutations.setName("");
+            sessionStorage.setItem('isLogin', false);
+            router.replace({
+              path: '/login',
+              query: {
+                redirect: router.currentRoute.fullPath
+              }
+            })
+        }
+      }
+      return response
+    },
+    //接口错误状态处理，也就是说无响应时的处理
+    error => {
+      return Promise.reject(error.response.status) // 返回接口返回的错误信息
+    }
+)
 
 export default $Http

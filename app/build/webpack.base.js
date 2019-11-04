@@ -23,6 +23,12 @@ module.exports = {
           "@API": path.resolve(__dirname, "../src/api")
         }
     },
+    // 打包排除在外
+    externals: {
+      'vue': 'Vue',
+      'vue-router': 'VueRouter',
+      'element-ui': 'ELEMENT'
+    },
     module: {
         //loader的执行顺序是从下到上,从右到左
         rules: [
@@ -42,21 +48,9 @@ module.exports = {
             {
                 test: /\.js$/,
                 use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            // //预设 用babel把es6转为es5
-                            // presets: ['@babel/preset-env'],
-                            // plugins: [
-                            //     ["@babel/plugin-proposal-class-properties", { "loose": true }], //支持class语法
-                            //     "@babel/plugin-transform-runtime", //支持promise的语法 Generator语法
-                            //     "@babel/plugin-syntax-dynamic-import" //支持import()函数
-                            // ],
-                            // include: [path.resolve('../src'), path.resolve('../node_modules/mint-ui/src'), path.resolve('../node_modules/mint-ui/packages')]
-                        }
-                    }
+                    { loader: 'babel-loader' }
                 ],
-                include: [path.resolve('../src'), path.resolve('../node_modules/mint-ui/src'), path.resolve('../node_modules/mint-ui/packages')]
+                // include: [path.resolve('../src'), path.resolve('../node_modules/element-ui/src'), path.resolve('../node_modules/element-ui/packages')]
                 // include: path.resolve(__dirname,'src'), //包括src下面的js
                 // exclude: /node_modules/ //排除那些js 
             },

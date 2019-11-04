@@ -3,4 +3,6 @@ app/node_modules/
 app/dist/
 app/yarn.lock
 service/node_modules/
+service/static/
+service/public/
 service/yarn.lock

@@ -73,7 +73,7 @@ router.post('/login', function(req, res, next) {
     if(username) {
       // 设置token
       //设置token
-      token.setToken({username,res});
+      token.setToken({user: username,res});
       res.json(
         new SuccessModel(data)
       )
@@ -89,8 +89,6 @@ router.post('/login', function(req, res, next) {
 router.post('/delete', function(req, res, next) {
   
   deleteUser(req.body).then(data => {
-    console.log(data)
-
     // affectedRows 影响的函数
     let { affectedRows } = data;
 

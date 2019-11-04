@@ -73,14 +73,12 @@ export default {
         width: 60px;
         position: absolute;
         margin-left: 30px;
-        a {
+        img {
+            width: 100%;
             display: inline-block;
             width: 60px;
             line-height: 1;
             @include ct;
-            img {
-                width: 100%;
-            }
         }
     }
     ul {

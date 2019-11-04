@@ -46,7 +46,7 @@ router.get('/query', function(req, res, next) {
     data.length && data.forEach(_ => {
       delete _['(select count(*) from freeconsultation)']
     })
-    console.log(req.query);
+
     let list = {
       list: data,
       pargData

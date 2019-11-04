@@ -37,6 +37,7 @@ app.use(function(req, res, next) {
     let token = until.cookieToJson(cookie);
     // 检查token是否有效（过期和非法）
     let user = tokenUtil.checkToken(token);
+    // console.log(token, cookie);
     if (user) {
         //将当前用户的信息挂在req对象上，方便后面的路由方法使用
         req.user = user;
@@ -46,12 +47,12 @@ app.use(function(req, res, next) {
   
         next(); //继续下一步路由
     } else {
-        //需要登录态域名白名单
+        //不需要登录态域名白名单
         if (config.tokenApi.join(',').indexOf(req.path) == -1) {
             next();
             return;
         }
-        res.json({ code: 400, message: '无效的token.' });
+        res.json({ code: 401, message: '无效的token.' });
     }
 });
 

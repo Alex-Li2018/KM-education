@@ -27,33 +27,14 @@ import { mutations, store } from '../../store/store'
 
 export default {
     data() {
-      const checkusername = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('用户名不能为空'));
-        } else {
-            callback();
-        }
-      };
-      const validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else {
-          if (this.ruleForm.checkPass !== '') {
-            this.$refs.ruleForm.validateField('checkPass');
-          }
-          callback();
-        }
-      };
       return {
         ruleForm: {
           pass: '',
-        //   checkPass: '',
           username: ''
         },
         rules: {
-          pass: [{ validator: validatePass, trigger: 'blur' }],
-        //   checkPass: [{ validator: validatePassCopy, trigger: 'blur' }],
-          username: [{ validator: checkusername, trigger: 'blur' }]
+          pass: [ { required: true, message: '请输入密码', trigger: 'blur' },],
+          username: [ { required: true, message: '请输入用户名', trigger: 'blur' },]
         }
       };
     },
@@ -72,7 +53,12 @@ export default {
                 mutations.setName(data.username);
                 // 同时将数据存入sessionStorage中
                 sessionStorage.setItem('isLogin', true);
-                this.$router.push({ path: '/admin/free-check', });
+                // 判断是否带有重定向路径
+                if(this.$route.query.redirect) {
+                  this.$router.push({ path: this.$route.query.redirect })
+                } else {
+                  this.$router.push({ path: '/admin/free-check', });
+                }
               } else {
                 sessionStorage.setItem('isLogin', false);
               }

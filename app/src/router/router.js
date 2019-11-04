@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+// import Vue from 'vue'
+// import VueRouter from 'vue-router'
 
-Vue.use(VueRouter)
+// Vue.use(VueRouter)
 
 // 1. 定义 (路由) 组件。
 const Home = () => import(/* webpackChunkName: "home" */ '../page/home/home.vue');

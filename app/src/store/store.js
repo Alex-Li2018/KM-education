@@ -1,10 +1,15 @@
 import Vue from 'vue'
 
 export const store = Vue.observable({
-  username: ''
+  username: '',
+  showDialog: false
 })
+
 export const mutations = {
-  setName (data) {
+  setName(data) {
     store.username = data;
+  },
+  setShowDialog(data) {
+    store.showDialog = data;
   }
 }
