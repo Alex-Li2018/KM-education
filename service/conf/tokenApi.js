@@ -7,6 +7,7 @@ module.exports = {
         '/upload/img',
         // 查询时不需要校验
         // '/banner/query',
+        // '/store-entry/create',
         '/banner/update',
         '/banner/insert',
         '/free-consultation/query'

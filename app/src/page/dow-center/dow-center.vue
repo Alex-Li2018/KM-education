@@ -60,6 +60,7 @@
 
 <script>
 import { isPhone } from '@until/until-tool';
+import { insertStoreEntryAPI } from "@API/store-entry";
 
 export default {
     data() {
@@ -113,6 +114,31 @@ export default {
                 ]
             }
         }
+    },
+    methods: {
+        // 提交
+        onSubmit() {
+            this.$refs['ruleForm'].validate((valid) => {
+                if (valid) {
+                    let params = {
+                        "production": this.form.production, 
+                        "phoneNum": this.form.phoneNum, 
+                        "link": this.form.link
+                    }
+                    insertStoreEntryAPI(params).then(res => {
+                        this.$notify({
+                            title: '成功',
+                            message: '数据新增成功',
+                            type: 'success'
+                        });
+                        this.$refs['ruleForm'].resetFields();
+                    })
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+        },
     }
 }
 </script>

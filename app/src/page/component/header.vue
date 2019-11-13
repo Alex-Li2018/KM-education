@@ -133,8 +133,23 @@ export default {
                     case 'operate':
                         this.activeIndex = 1;
                     break;
+                    case 'planeDesign':
+                        this.activeIndex = 2;
+                    break;
+                    case 'eTrain':
+                        this.activeIndex = 3;
+                    break;
+                    case 'dowCenter':
+                        this.activeIndex = 4;
+                    break;
                     case 'data-service':
                         this.activeIndex = 5;
+                    break;
+                    case 'success':
+                        this.activeIndex = 6;
+                    break;
+                    case 'goodness':
+                        this.activeIndex = 8;
                     break;
                     default:
                         this.activeIndex = 0;
