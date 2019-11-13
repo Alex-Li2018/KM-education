@@ -4,7 +4,7 @@
         <el-dialog
             title="免费诊断店铺"
             :visible.sync="show"
-            width="900"
+            width="1200"
             :before-close="handleClose">
             <section class="form-list">
                 <section class="form-title">
@@ -28,10 +28,12 @@
                             </template>
                         </el-radio-group>
                     </el-form-item>
-                    <el-form-item v-model="form.service" label="有没有想了解的服务">
-                        <template v-for="item in serviceList">
-                            <el-radio :key="item.id" :label="item.label"></el-radio>
-                        </template>
+                    <el-form-item label="有没有想了解的服务">
+                        <el-radio-group v-model="form.service">
+                            <template v-for="item in serviceList">
+                                <el-radio :key="item.id" :label="item.label"></el-radio>
+                            </template>
+                        </el-radio-group>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit">免费诊断店铺</el-button>
@@ -112,7 +114,6 @@ export default {
                         "wantservice": this.form.service
                     }
                     freeCheckAPI(params).then(res => {
-                        console.log(res);
                         mutations.setShowDialog(false);
                     })
                 } else {

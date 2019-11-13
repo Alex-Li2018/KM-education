@@ -85,7 +85,6 @@
                   width="100">
                   <template slot-scope="scope">
                     <el-tag
-                      closable
                       :type="scope.row.state ? 'success' : 'info'">
                       {{scope.row.state ? '激活' : '禁用'}}
                     </el-tag>
@@ -125,7 +124,7 @@ import { insertBannerAPI, queryBannerAPI, upadteBannerAPI } from '@API/banner'
 export default {
     data() {
       return {
-        action: '/api/upload/img',
+        action: '',
         dialogVisible: false,
         fileList: [],
         ruleForm: {
@@ -147,6 +146,7 @@ export default {
       };
     },
     created() {
+      this.action = process.env.NODE_ENV == 'development' ? '/api/upload/img' : '/upload/img';
       this.getTableData();
     },
     filters: {
@@ -188,7 +188,7 @@ export default {
       },
       //获取table数据
       getTableData() {
-        queryBannerAPI().then(res => {
+        queryBannerAPI({type: 'all'}).then(res => {
           if(res.code == 200) {
             this.tableData = res.data;
           }
@@ -196,7 +196,7 @@ export default {
       },
       //提交表单
       submitForm(formName) {
-        if(this.fileList) {
+        if(!this.fileList.length) {
           this.$notify.error({
             title: '错误',
             message: '请上传banner图片!'
@@ -224,6 +224,7 @@ export default {
                 });
                 this.$refs['ruleForm'].resetFields();
                 this.fileList = [];
+                this.getTableData();
               }
             });
           } else {
@@ -242,7 +243,7 @@ export default {
           this.fileList = fileList.map(_ => {
             return {
               name: _.name,
-              url: `api${data.url}`
+              url: process.env.NODE_ENV == 'development' ? `api${data.url}` : `${data.url}`
             }
           })
         }
@@ -251,7 +252,6 @@ export default {
         this.fileList = fileList
       },
       handlePictureCardPreview(file) {
-        console.log(file)
         let { response } = file;
         if(response.code == 200) {
           this.imgSrc = `api${response.data.url}`;

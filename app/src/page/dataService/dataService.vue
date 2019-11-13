@@ -218,7 +218,7 @@ export default {
             }
         }
         .plane-content {
-            padding: 0 100px;
+            padding: 0 200px;
             ul {
                 // width: 100vw;
                 display: flex;
@@ -266,7 +266,8 @@ export default {
                 justify-content: space-between;
             }
             li {
-                width: 290px;
+                // width: 290px;
+                width: 28%;
                 height: 120px;
                 padding: 40px 20px;
                 box-sizing: content-box;

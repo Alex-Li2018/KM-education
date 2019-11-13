@@ -5,7 +5,7 @@
         <section class="carousel">
             <el-carousel :autoplay="true" indicator-position="none">
                 <el-carousel-item v-for="item in imgArr" :key="item.id">
-                <img :src="item.src" />
+                <img :src="item.banner_url" />
                 </el-carousel-item>
             </el-carousel>
         </section>
@@ -124,6 +124,7 @@
 import breathingLightMixin from "@mixin/breathing-light"
 import { isPhone } from '@until/until-tool'
 import { freeCheckAPI } from "@API/free-check"
+import { queryBannerAPI } from "@API/banner"
 
 export default {
     mixins: [breathingLightMixin],
@@ -140,11 +141,11 @@ export default {
         return {
             //图片数据
             imgArr: [
-                {id: 1, src: require("../../img/banner/operate.jpg")},
-                {id: 2, src: require("../../img/banner/tCat.jpg")},
-                {id: 3, src: require("../../img/banner/eTrain.jpg")},
-                {id: 4, src: require("../../img/banner/freeCheck.jpg")},
-                {id: 5, src: require("../../img/banner/design.jpg")}
+                {id: 1, banner_url: require("../../img/banner/operate.jpg")},
+                {id: 2, banner_url: require("../../img/banner/tCat.jpg")},
+                {id: 3, banner_url: require("../../img/banner/eTrain.jpg")},
+                {id: 4, banner_url: require("../../img/banner/freeCheck.jpg")},
+                {id: 5, banner_url: require("../../img/banner/design.jpg")}
             ], 
             //星级服务
             starServicelist: [
@@ -237,6 +238,9 @@ export default {
             }
         }
     },
+    created() {
+        this.getBannerList()
+    },
     methods: {
         // 提交
         onSubmit() {
@@ -262,7 +266,15 @@ export default {
                     return false;
                 }
             });
-        } 
+        },
+        // 获取banner信息
+        getBannerList() {
+            queryBannerAPI({ type: 'index' }).then(res => {
+                if(res.code == 200 && res.data.length) {
+                    this.imgArr = res.data;
+                }
+            })
+        }
     }
 }
 </script>
@@ -384,6 +396,7 @@ export default {
                 display: flex;
                 padding: 80px 100px; 
                 align-items: center;
+                justify-content: center;
                 // @include cl;
                 img {
                     width: 270px;

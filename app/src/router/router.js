@@ -12,7 +12,12 @@ const Login = () => import(/* webpackChunkName: "login" */ '../page/admin/login.
 const Admin = () => import(/* webpackChunkName: "admin" */ '../page/admin/admin.vue');
 const FreeCheck = () => import(/* webpackChunkName: "freeCheck" */ '../page/admin/free-check.vue');
 const User = () => import(/* webpackChunkName: "user" */ '../page/admin/user.vue');
-const Banner = () => import(/* webpackChunkName: "user" */ '../page/admin/banner.vue');
+const Banner = () => import(/* webpackChunkName: "banner" */ '../page/admin/banner.vue');
+const planeDesign = () => import(/* webpackChunkName: "planeDesign" */ '../page/plane-design/plane-design.vue');
+const eTrain = () => import(/* webpackChunkName: "eTrain" */ '../page/e-train/e-train.vue');
+const dowCenter = () => import(/* webpackChunkName: "dowCenter" */ '../page/dow-center/dow-center.vue');
+const success = () => import(/* webpackChunkName: "success" */ '../page/success/success.vue');
+const goodness = () => import(/* webpackChunkName: "goodness" */ '../page/goodness/goodness.vue');
 
 // 2. 定义路由
 const routes = [
@@ -20,6 +25,11 @@ const routes = [
   { path: '/home', name: 'Home', component: Home, meta: { page: 'home', requireLogin: false, } },
   { path: '/operate', name: 'Operate', component: Operate, meta: { page: 'operate', requireLogin: false, } },
   { path: '/operate-jd', name: 'OperateJD', component: OperateJD, meta: { page: 'operate', requireLogin: false, } },
+  { path: '/plane-design', name: 'planeDesign', component: planeDesign, meta: { page: 'planeDesign', requireLogin: false, } },
+  { path: '/e-train', name: 'eTrain', component: eTrain, meta: { page: 'eTrain', requireLogin: false, } },
+  { path: '/dow-center', name: 'dowCenter', component: dowCenter, meta: { page: 'dowCenter', requireLogin: false, } },
+  { path: '/success', name: 'success', component: success, meta: { page: 'success', requireLogin: false, } },
+  { path: '/goodness', name: 'goodness', component: goodness, meta: { page: 'goodness', requireLogin: false, } },
   { path: '/data-service', name: 'DataService', component: DataService, meta: { page: 'data-service', requireLogin: false, } },
   { path: '/login', name: 'Login', component: Login, meta: { requireLogin: false, admin: true } },
   { path: '/admin', 

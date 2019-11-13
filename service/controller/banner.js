@@ -1,10 +1,10 @@
 const { exec, escape } = require('../db/mysql.js')
 
 // 查询banner
-const queryBanner = () => {
+const queryBanner = ({type}) => {
     // 查询没被删除(软删除)的图片
-    // where state = 1
-    const sql = `select * from banner`
+    const sql = type == 'all' ? `select * from banner where state = 1`
+                : `select * from banner where type = '${type}' and state = 1`
     return exec(sql).then(rows => {
         return rows || {};
     })
@@ -24,7 +24,6 @@ const insertBanner = (bannerInfo) => {
             return rows || {};
         })
         .catch(res => {
-            console.log(res)
             return res;
         })
 }
@@ -40,7 +39,6 @@ const updateBanner = (bannerInfo) => {
             return rows || {};
         })
         .catch(res => {
-            console.log(res)
             return res;
         })
 }

@@ -21,8 +21,8 @@ let app = express();
 
 // 跨域配置 本地调试使用
 app.use(function(req, res, next) {
-    // console.log(req.headers);
-    // res.header("Access-Control-Allow-Origin", 'http://localhost:8080');
+    //设置允许跨域的域名，*代表允许任意域名跨域
+    // res.header("Access-Control-Allow-Origin", '*');
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, wec-access-token, Set-Cookie");
     res.header("Access-Control-Allow-Credentials", "true");
   
@@ -37,7 +37,6 @@ app.use(function(req, res, next) {
     let token = until.cookieToJson(cookie);
     // 检查token是否有效（过期和非法）
     let user = tokenUtil.checkToken(token);
-    // console.log(token, cookie);
     if (user) {
         //将当前用户的信息挂在req对象上，方便后面的路由方法使用
         req.user = user;

@@ -5,7 +5,8 @@ module.exports = {
         '/user/delete',
         '/user/query',
         '/upload/img',
-        '/banner/query',
+        // 查询时不需要校验
+        // '/banner/query',
         '/banner/update',
         '/banner/insert',
         '/free-consultation/query'

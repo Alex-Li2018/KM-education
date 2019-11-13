@@ -3,16 +3,16 @@
         <!-- 头部导航 -->
         <section class="header-nav header-fixed">
             <!-- <section class="header-fixed"> -->
-                <h1 class="logo">
-                    <router-link to="/home">
+                <h1 class="logo" @click="jumpUrl('/home')">
+                    <!-- <router-link to="/home"> -->
                         <img src="../../img/banner/logo.png" />
-                    </router-link>
+                    <!-- </router-link> -->
                 </h1>
                 <ul>
-                    <li v-for="item in menuList" :key="item.id">
-                        <router-link :to="item.url">
+                    <li v-for="item in menuList" :key="item.id" @click="jumpUrl(item.url)">
+                        <!-- <router-link :to="item.url"> -->
                             <span>{{ item.menuName }}</span>
-                        </router-link>
+                        <!-- </router-link> -->
                     </li>
                 </ul>
             <!-- </section> -->
@@ -44,6 +44,11 @@ export default {
             navTitle: ''
         }
     },
+    methods: {
+        jumpUrl(url) {
+            url && this.$router.push({ path: url })
+        }
+    }
 }
 </script>
 

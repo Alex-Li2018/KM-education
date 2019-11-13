@@ -1,23 +1,30 @@
 <template>
     <!-- 登录页面 -->
     <div class="login-bg">
+      <div class="login-content">
+        <img src="../../img/login/login.jpg" alt="">
         <div class="login-form">
-            <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="用户名" prop="username">
-                    <el-input v-model.number="ruleForm.username"></el-input>
-                </el-form-item>
-                <el-form-item label="密码" prop="pass">
-                    <el-input type="password" v-model="ruleForm.pass" auto-complete="off"></el-input>
-                </el-form-item>
-                <!-- <el-form-item label="确认密码" prop="checkPass">
-                    <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off"></el-input>
-                </el-form-item> -->
-                <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-                    <el-button @click="resetForm('ruleForm')">重置</el-button>
-                </el-form-item>
-            </el-form>
-        </div>   
+          <section class="title">
+            <img src="../../img/login/icon.png" alt="">
+            <h4>管理系统登录</h4>
+          </section>
+          <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+              <el-form-item label="用户名" prop="username">
+                  <el-input v-model.number="ruleForm.username"></el-input>
+              </el-form-item>
+              <el-form-item label="密码" prop="pass">
+                  <el-input type="password" v-model="ruleForm.pass" auto-complete="off"></el-input>
+              </el-form-item>
+              <!-- <el-form-item label="确认密码" prop="checkPass">
+                  <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off"></el-input>
+              </el-form-item> -->
+              <el-form-item>
+                  <el-button type="primary" @click="submitForm('ruleForm')">立即登录</el-button>
+                  <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
+              </el-form-item>
+          </el-form>
+        </div>
+      </div>   
     </div>
 </template>
 
@@ -55,9 +62,9 @@ export default {
                 sessionStorage.setItem('isLogin', true);
                 // 判断是否带有重定向路径
                 if(this.$route.query.redirect) {
-                  this.$router.push({ path: this.$route.query.redirect })
+                  this.$router.push({ path: decodeURI(this.$route.query.redirect) })
                 } else {
-                  this.$router.push({ path: '/admin/free-check', });
+                  this.$router.push({ path: '/admin/free-check' });
                 }
               } else {
                 sessionStorage.setItem('isLogin', false);
@@ -80,25 +87,62 @@ export default {
 @import "../../style/mixin.scss";
 
 .login-bg {
-    width: 100vw;
-    height: 100vh;
-    background: url('../../img/admin/bg.jpg') no-repeat center;
-    position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: url('../../img/login/bg.png') no-repeat center;
+  position: relative;
+}
+.login-content {
+  display: flex;
+  height: 450px;
+  @include center;
+  padding: 20px;
+  box-sizing: content-box;
+  border-radius: 10px;
+  background-color: #fff;
+  img {
+    height: 450px;
+  }
 }
 .login-form {
-    // width: 300px;
-    @include center;
-    ::v-deep .el-form-item__content {
-        width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    img {
+      height: 40px;
+      width: 40px;
+      margin-bottom: 10px;
     }
-    ::v-deep .el-form-item__label {
-        color: #fff;
+    h4 {
+      font-weight: 600;
+      font-size: 26px;
     }
-    ::v-deep .el-form-item__content {
-        text-align: center;
-        span {
-            // color: #fff;
-        }
+  }
+  button {
+    background-color: #4067f4 !important;
+  }
+  ::v-deep .el-form-item__content {
+      width: 300px;
+  }
+  ::v-deep .el-form-item__label {
+      // color: #fff;
+      font-weight: 600;
+  }
+  ::v-deep .el-form-item__content {
+      text-align: center;
+      span {
+          // color: #fff;
+      }
+  }
+  ::v-deep .el-button {
+    span {
+      font-weight: 600 !important;
     }
+  }
 }
 </style>

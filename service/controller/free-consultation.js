@@ -11,7 +11,6 @@ const createFreeConsultation = (freeConsultation) => {
             return rows || {};
         })
         .catch(res => {
-            console.log(res)
             return res;
         })
 }

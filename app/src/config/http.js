@@ -11,7 +11,8 @@ if(process.env.NODE_ENV == 'development') {
 }else if(process.env.NODE_ENV == 'mock') {
     instance.defaults.baseURL = 'http://localhost:8080'
 }else if(process.env.NODE_ENV == 'production') {
-    instance.defaults.baseURL = ''
+    // instance.defaults.baseURL = 'http://47.107.121.17'
+    instance.defaults.baseURL = 'http://39.100.251.213'
 }
 
 // post请求头
@@ -61,7 +62,7 @@ instance.interceptors.response.use(
             router.replace({
               path: '/login',
               query: {
-                redirect: router.currentRoute.fullPath
+                redirect: encodeURI(router.currentRoute.fullPath)
               }
             })
         }

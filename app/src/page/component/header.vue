@@ -1,7 +1,7 @@
 <template>
     <!-- 头部 -->
     <!-- 解决吸顶跳动的问题 -->
-    <div>
+    <div @mouseleave="leaveEvent">
         <section id="header-fixed" :class='[srcollFlag ? "srcoll-active" : "","header issFixed"]'>
             <div class="header-content">
                 <!-- logo区域 -->
@@ -102,11 +102,11 @@ export default {
                 { name: "代运营", url: "operate"}, 
                 { name: "平面设计", url: "plane-design"}, 
                 { name: "电商培训", url: "e-train"}, 
-                { name: "代入驻", url: "#"}, 
+                { name: "代入驻", url: "dow-center"}, 
                 { name: "数据服务", url: "data-service"}, 
-                { name: "成功案例", url: "#"}, 
+                { name: "成功案例", url: "success"}, 
                 { name: "新闻动态", url: "#"}, 
-                { name: "柯明教育的优势", url: "#"}, 
+                { name: "柯明教育的优势", url: "goodness"}, 
                 { name: "免费诊断店铺", url: "#"},
                 { name: "后台管理", url: "admin/free-check"}],
             operationList: [ "淘宝代运营", "天猫代运营", "1688代运营", "拼多多代运营", "京东代运营", "直通车代运营"], //代运营
@@ -145,7 +145,6 @@ export default {
     },
     created() {
         this.isLoginFlag = sessionStorage.getItem('isLogin') || false;
-        console.log(this.isLoginFlag)
     },
     mounted() {
 	    // handleScroll为页面滚动的监听回调

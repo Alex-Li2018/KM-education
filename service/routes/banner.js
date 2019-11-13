@@ -6,7 +6,7 @@ const { SuccessModel, ErrorModel } = require('../model/resModel')
 
 router.get('/query', function(req, res, next) {
 
-  queryBanner().then(data => {
+  queryBanner(req.query).then(data => {
     data.forEach(_ => {
       _.banner_url_list = _.banner_url.split(",")
     })

@@ -55,7 +55,7 @@ module.exports = smart(base,{
 
                 Licensed Under MIT
 
-                shoppingMall @Version 1.0.0
+                KM-education @Version 1.0.0
             `
         )
     ]
