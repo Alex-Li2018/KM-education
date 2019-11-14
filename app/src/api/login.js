@@ -39,3 +39,17 @@ export function queryUserAPI(params) {
             return res.data;
         })
 }
+
+//创建用户
+export function createUserAPI(params) {
+    let url = `user/create`;
+    let data = Object.assign({}, params);
+
+    return $Http.post(url,data)
+        .then(res => {
+            return res.data;
+        })
+        .catch(res => {
+            return res.data;
+        })
+}

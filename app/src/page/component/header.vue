@@ -105,7 +105,7 @@ export default {
                 { name: "代入驻", url: "dow-center"}, 
                 { name: "数据服务", url: "data-service"}, 
                 { name: "成功案例", url: "success"}, 
-                { name: "新闻动态", url: "#"}, 
+                { name: "新闻动态", url: "news"}, 
                 { name: "柯明教育的优势", url: "goodness"}, 
                 { name: "免费诊断店铺", url: "#"},
                 { name: "后台管理", url: "admin/free-check"}],

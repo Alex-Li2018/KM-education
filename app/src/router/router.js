@@ -18,6 +18,7 @@ const eTrain = () => import(/* webpackChunkName: "eTrain" */ '../page/e-train/e-
 const dowCenter = () => import(/* webpackChunkName: "dowCenter" */ '../page/dow-center/dow-center.vue');
 const success = () => import(/* webpackChunkName: "success" */ '../page/success/success.vue');
 const goodness = () => import(/* webpackChunkName: "goodness" */ '../page/goodness/goodness.vue');
+const news = () => import(/* webpackChunkName: "news" */ '../page/news/news.vue');
 
 // 2. 定义路由
 const routes = [
@@ -30,6 +31,7 @@ const routes = [
   { path: '/dow-center', name: 'dowCenter', component: dowCenter, meta: { page: 'dowCenter', requireLogin: false, } },
   { path: '/success', name: 'success', component: success, meta: { page: 'success', requireLogin: false, } },
   { path: '/goodness', name: 'goodness', component: goodness, meta: { page: 'goodness', requireLogin: false, } },
+  { path: '/news', name: 'news', component: news, meta: { page: 'news', requireLogin: false, } },
   { path: '/data-service', name: 'DataService', component: DataService, meta: { page: 'data-service', requireLogin: false, } },
   { path: '/login', name: 'Login', component: Login, meta: { requireLogin: false, admin: true } },
   { path: '/admin', 
