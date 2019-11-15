@@ -10,7 +10,9 @@ module.exports = {
         // '/store-entry/create',
         '/banner/update',
         '/banner/insert',
-        '/free-consultation/query'
+        '/free-consultation/query',
+        '/article/delete',
+        '/article/create'
     ],
     uploadPath:'/static/',
     accessKeySecret: 'abc123'

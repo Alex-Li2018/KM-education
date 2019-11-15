@@ -37,15 +37,15 @@
                 </template>
             </el-table-column>
         </el-table>
-         <div class="block">
-            <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page.sync="currentPage"
-                :page-size="pageSize"
-                layout="prev, pager, next, jumper"
-                :total="total">
-            </el-pagination>
+        <div class="block">
+          <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page.sync="currentPage"
+              :page-size="pageSize"
+              layout="prev, pager, next, jumper"
+              :total="total">
+          </el-pagination>
         </div>
     </div>
 </template>
@@ -119,8 +119,8 @@ export default {
         },
         queryList() {
             let params = {
-                pageSize: this.pageSize,
-                pageIndex: this.currentPage
+              pageSize: this.pageSize,
+              pageIndex: this.currentPage
             }
             queryfreeCheckAPI(params).then(res => {
                 if(res.code == 200) {
@@ -139,8 +139,8 @@ export default {
 <style lang="scss" scoped>
 .free-check {
     .block {
-        margin: 30px 0;
-        text-align: right;
+      margin: 30px 0;
+      text-align: right;
     }
     .nav {
         font-family: MicrosoftYaHei-Bold;

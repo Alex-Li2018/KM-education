@@ -37,9 +37,10 @@ export default {
         return {
             menuList: [
                 {id: 0, menuName: '免费诊断数据', url: 'free-check' },
-                {id: 1, menuName: '用户管理', url: 'user'},
-                {id: 2, menuName: '文章管理', url: 'projects'},
-                {id: 3, menuName: '轮播图管理', url: 'banner'},
+                {id: 1, menuName: '店铺入驻数据', url: 'store-entry' },
+                {id: 2, menuName: '用户管理', url: 'user'},
+                {id: 3, menuName: '文章管理', url: 'article'},
+                {id: 4, menuName: '轮播图管理', url: 'banner'},
             ],
             navTitle: ''
         }

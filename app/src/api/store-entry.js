@@ -11,3 +11,16 @@ export function insertStoreEntryAPI(params) {
             return res.data;
         })
 }
+
+export function queryStoreEntryAPI(params) {
+    let url = `store-entry/query`;
+    let data = Object.assign({},params);
+
+    return $Http.get(url,data)
+        .then(res => {
+            return res.data;
+        })
+        .catch(res => {
+            return res.data;
+        })
+}

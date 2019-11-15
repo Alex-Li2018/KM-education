@@ -11,6 +11,8 @@ const DataService = () => import(/* webpackChunkName: "dataService" */ '../page/
 const Login = () => import(/* webpackChunkName: "login" */ '../page/admin/login.vue');
 const Admin = () => import(/* webpackChunkName: "admin" */ '../page/admin/admin.vue');
 const FreeCheck = () => import(/* webpackChunkName: "freeCheck" */ '../page/admin/free-check.vue');
+const storeEntry = () => import(/* webpackChunkName: "storeEntry" */ '../page/admin/store-entry.vue');
+const article = () => import(/* webpackChunkName: "article" */ '../page/admin/article.vue');
 const User = () => import(/* webpackChunkName: "user" */ '../page/admin/user.vue');
 const Banner = () => import(/* webpackChunkName: "banner" */ '../page/admin/banner.vue');
 const planeDesign = () => import(/* webpackChunkName: "planeDesign" */ '../page/plane-design/plane-design.vue');
@@ -41,6 +43,8 @@ const routes = [
     children: [
       {path: '', component: FreeCheck, meta: { requireLogin: true, admin: true }},
       {path: 'free-check', name: 'FreeCheck', component: FreeCheck, meta: { requireLogin: true, admin: true }},
+      {path: 'store-entry', name: 'storeEntry', component: storeEntry, meta: { requireLogin: true, admin: true }},
+      {path: 'article', name: 'article', component: article, meta: { requireLogin: true, admin: true }},
       {path: 'user', name: 'User', component: User, meta: { requireLogin: true, admin: true }},
       {path: 'banner', name: 'Banner', component: Banner, meta: { requireLogin: true, admin: true }},
     ]},

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 //引入sql的操作
-const { createStoreEntry,queryStoreEntry } = require('../controller/store-entry')
+const { createStoreEntry, queryStoreEntry } = require('../controller/store-entry')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 
 router.post('/create', function(req, res, next) {
@@ -23,7 +23,22 @@ router.post('/create', function(req, res, next) {
 });
 
 router.get('/query', function(req, res, next) {
-  
+  queryStoreEntry(req.query).then(data => {
+    let total = data.length ? data[0]['(select count(*) from storeentry)'] : 0;
+    let { pageSize, pageIndex } = req.query;
+    let pargData = Object.assign({ total }, { pageSize: +pageSize, pageIndex: +pageIndex });
+    data.length && data.forEach(_ => {
+      delete _['(select count(*) from storeentry)']
+    })
+
+    let list = {
+      list: data,
+      pargData
+    }
+    res.json(
+      new SuccessModel(list)
+    )
+  })
 });
 
 module.exports = router;

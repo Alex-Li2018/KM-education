@@ -16,6 +16,7 @@ const uploadRouter = require("./routes/upload");
 const staticRouter = require('./routes/static');
 const bannerRouter = require('./routes/banner');
 const storeEntryRouter = require('./routes/store-entry');
+const articleRouter = require('./routes/article');
 
 //实例一个express的app
 let app = express();
@@ -70,6 +71,7 @@ app.use('/upload', uploadRouter);
 app.use('/static', staticRouter);
 app.use('/banner', bannerRouter);
 app.use('/store-entry', storeEntryRouter);
+app.use('/article', articleRouter);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
