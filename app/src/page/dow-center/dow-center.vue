@@ -67,7 +67,7 @@ export default {
         const validateLink = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请填写联系方式'));
-            } else if (isPhone(isPhone)) {
+            } else if (!isPhone(value)) {
                 callback(new Error('请输入正确的手机号码'));
             } else {
                 callback();
@@ -131,6 +131,11 @@ export default {
                             message: '数据新增成功',
                             type: 'success'
                         });
+                        this.form = {
+                            production: '',
+                            phoneNum: '',
+                            link: ''
+                        }
                         this.$refs['ruleForm'].resetFields();
                     })
                 } else {
@@ -163,6 +168,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        padding: 0 300px;
         li {
             width: 295px;
             height: 200px;
@@ -192,6 +198,7 @@ export default {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            padding: 0 300px;
             li {
                 width: 400px;
                 height: 200px;

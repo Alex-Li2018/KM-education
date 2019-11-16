@@ -1,14 +1,30 @@
 <template>
     <div class="goodness">
-        <img src="../../img/goodness/goodness_01.jpg" alt="" />
-        <img src="../../img/goodness/goodness_02.jpg" alt="" />
-        <img src="../../img/goodness/goodness_03.jpg" alt="" />
+        <img :src="imgArr[0]" />
+        <img :src="imgArr[1]" />
+        <img :src="imgArr[2]" />
     </div>
 </template>
 
 <script>
 export default {
-    
+    data() {
+        return {
+            imgArr: [
+                'static/show-img/goodness_01.jpg',
+                'static/show-img/goodness_02.jpg',
+                'static/show-img/goodness_03.jpg',
+            ]
+        }
+    },
+    created() {
+        this.imgArr = this.imgArr.map(_ => {
+            if(process.env.NODE_ENV == 'development') {
+                _ = `api/${_}`
+            }
+            return _;
+        })
+    }
 }
 </script>
 

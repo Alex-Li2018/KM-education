@@ -180,7 +180,7 @@ export default {
             this.dialogVisible = true;
         },
         handleClose() {
-
+            this.dialogVisible = false;
         },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
@@ -195,12 +195,13 @@ export default {
                         if(res.code == 200) {
                             this.$notify.success({
                                 title: '成功',
-                                message: e.message
+                                message: '新增用户成功'
                             });
+                            this.dialogVisible = false;
                         }else {
                             this.$notify.error({
                                 title: '失败',
-                                message: e.message
+                                message: '新增用户成功'
                             });
                         }
                     })
@@ -209,6 +210,9 @@ export default {
                     return false;
                 }
             });
+        },
+        resetForm(formName) {
+            this.$refs['ruleForm'].resetFields();
         }
     },
 }

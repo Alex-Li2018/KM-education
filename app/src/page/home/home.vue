@@ -76,7 +76,7 @@
                 <p>运营流程</p> 
                 <p>分为6个阶段</p> 
             </header>
-            <img class="operation-content" src="../../img/other/operation-content.jpg" />
+            <img class="operation-content" :src="imgSrc" />
         </section>
         <!-- 免费检查 -->
         <section class="free-check">
@@ -132,13 +132,14 @@ export default {
         const validateLink = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请填写联系方式'));
-            } else if (isPhone(isPhone)) {
+            } else if (!isPhone(value)) {
                 callback(new Error('请输入正确的手机号码'));
             } else {
                 callback();
             }
         };
         return {
+            imgSrc: '',
             //图片数据
             imgArr: [
                 {id: 1, banner_url: require("../../img/banner/operate.jpg")},
@@ -239,7 +240,9 @@ export default {
         }
     },
     created() {
-        this.getBannerList()
+        this.getBannerList();
+        // 获取线上与线下的网站
+        this.imgSrc = process.env.NODE_ENV !== 'development' ? 'static/show-img/operation-content.jpg' : 'api/static/show-img/operation-content.jpg'
     },
     methods: {
         // 提交
@@ -260,6 +263,13 @@ export default {
                             type: 'success'
                         });
                         this.$refs['ruleForm'].resetFields();
+                        this.form = {
+                            link: '',
+                            name: '',
+                            shopNameOrAdder: '',
+                            platform: '',
+                            service: ''
+                        }
                     })
                 } else {
                     console.log('error submit!!');
@@ -399,8 +409,8 @@ export default {
                 justify-content: center;
                 // @include cl;
                 img {
-                    width: 270px;
-                    height: 200px;
+                    width: 350px;
+                    height: 250px;
                     &:nth-of-type(1) {
                         margin-left: 100px;
                     }
@@ -463,6 +473,7 @@ export default {
     width: 100vw;
     padding: 0 100px;
     background-color: #f4f4f4;
+    text-align: center;
     .title {
         height: 140px;
     }
@@ -472,6 +483,8 @@ export default {
         padding-top: 20px;
         width: 100%;
         padding-bottom: 0px;
+        width: 900px;
+        margin: 0 auto;
     }
 }
 //免费体检

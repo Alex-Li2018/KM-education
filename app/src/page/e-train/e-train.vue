@@ -1,13 +1,28 @@
 <template>
     <div class="e-tarin">
-        <img src="../../img/tarin/tarin_01.jpg" alt="">
-        <img src="../../img/tarin/tarin_02.jpg" alt="">
+        <img :src="imgArr[0]" />
+        <img :src="imgArr[1]" />
     </div>
 </template>
 
 <script>
 export default {
-    
+    data() {
+        return {
+            imgArr: [
+                'static/show-img/tarin_01.jpg',
+                'static/show-img/tarin_02.jpg'
+            ]
+        }
+    },
+    created() {
+        this.imgArr = this.imgArr.map(_ => {
+            if(process.env.NODE_ENV == 'development') {
+                _ = `api/${_}`
+            }
+            return _;
+        })
+    }
 }
 </script>
 

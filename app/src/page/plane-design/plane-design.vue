@@ -1,9 +1,9 @@
 <template>
     <div class="plane-design">
         <!-- 3张图片 -->
-        <img src="../../img/plane/plane_01.jpg" />
-        <img src="../../img/plane/plane_02.jpg" />
-        <img src="../../img/plane/plane_03.jpg" />
+        <img :src="imgArr[0]" />
+        <img :src="imgArr[1]" />
+        <img :src="imgArr[2]" />
         <!-- 服务内容 -->
         <section class="service-content">
             <div class="title">
@@ -51,8 +51,21 @@ export default {
                 {id: 6, name: '关联销售'},
                 {id: 7, name: '店招'},
                 {id: 8, name: '店铺logo'},
+            ],
+            imgArr: [
+                'static/show-img/plane_01.jpg',
+                'static/show-img/plane_02.jpg',
+                'static/show-img/plane_03.jpg',
             ]
         }
+    },
+    created() {
+        this.imgArr = this.imgArr.map(_ => {
+            if(process.env.NODE_ENV == 'development') {
+                _ = `api/${_}`
+            }
+            return _;
+        })
     }
 }
 </script>

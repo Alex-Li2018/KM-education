@@ -148,6 +148,9 @@ export default {
                     case 'success':
                         this.activeIndex = 6;
                     break;
+                    case 'news':
+                        this.activeIndex = 7;
+                    break;
                     case 'goodness':
                         this.activeIndex = 8;
                     break;
@@ -250,6 +253,7 @@ export default {
     .logo {
         width: 60px;
         position: relative;
+        left: 60px;
         a {
             display: inline-block;
             width: 60px;

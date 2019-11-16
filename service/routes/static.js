@@ -12,5 +12,11 @@ router.get('/img/*', function(req, res, next) {
     // res.writeHead(200,{'Content-Type':'image/jpeg'});
     res.sendFile(path.resolve(__dirname, `../static/${req.url}`));
 });
+// 静态文件展示
+router.get('/show-img/*', function(req, res, next) {
+    // let { filename } = req.params;
+    // res.writeHead(200,{'Content-Type':'image/jpeg'});
+    res.sendFile(path.resolve(__dirname, `../static/${req.url}`));
+});
 
 module.exports = router;
