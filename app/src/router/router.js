@@ -3,6 +3,10 @@
 
 // Vue.use(VueRouter)
 
+// 引入埋点数据
+import { createBurryCodeAPI } from "@API/burry-code";
+import getBrowserInfo from '@until/browser-info';
+
 // 1. 定义 (路由) 组件。
 const Home = () => import(/* webpackChunkName: "home" */ '../page/home/home.vue');
 const Operate = () => import(/* webpackChunkName: "operate" */ '../page/operate/operate.vue');
@@ -66,6 +70,26 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
     
+  }
+})
+
+//埋点数据
+router.afterEach((to, from) => {
+  let { fullPath, meta } = to;
+  if(!meta.requireLogin) {
+    let { address } = window.positionCity || {};
+    let { browser,version,OS } = getBrowserInfo();
+    let params = {
+      city: address || '', 
+      time: new Date().getTime(), 
+      page: fullPath, 
+      plate: JSON.stringify({ browser,version,OS }), 
+      burryId: '', 
+      burryCode: ''
+    }
+    address && createBurryCodeAPI(params).then(res => {
+
+    })
   }
 })
 
